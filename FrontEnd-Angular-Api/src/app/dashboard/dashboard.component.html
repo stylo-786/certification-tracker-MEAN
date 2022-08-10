@@ -1,0 +1,196 @@
+    <nav class="navbar bg-primary mt-1">
+      <div class="container-fluid">
+        <span id="liberty-heading" style="color: white;" class="navbar-brand mb-0 h1">Liberty Mutual Certification Tracker</span>
+        <div class="form-inline my-2 my-lg-0">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUserModal"> Add User </button>
+        </div>
+      </div>
+    </nav>
+
+    <table class="table container mt-2">
+        <thead>
+          <tr>
+            <th >Name</th>
+            <th >Certification</th>
+            <th >Status</th>
+            <th >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+
+                <td>{{student.name}}</td>
+                <td ><p *ngFor="let stud of student.cname">{{stud.certification}}</p></td>
+                <td ><p *ngFor="let status of student.cname">{{status.status}}</p></td>
+                <td>
+                    <button (click)="getId(student._id)" type="button" class="btn btn-outline-primary btn-sm " data-toggle="modal" data-target="#editModal">Edit</button>
+                    <button (click)="getId(student._id)" type="button" class="btn btn-outline-danger btn-sm mx-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                    <button (click)="getId(student._id)" type="button"  class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#addModal">Add</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+  
+  <!-- Modal for add button-->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add A Certificate </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <form #add="ngForm" (ngSubmit)="setCertificate(add.value); add.resetForm(); " ngNativeValidate>
+                <span>Certification Name </span> <br>
+                <input type="text" placeholder="Certification Name"  name="certification" ngModel required><br><br>
+                <span>Status </span><br>
+                <select  name="status" ngModel required>
+                  <option value="In progress">In progress</option>
+                  <option value="Completed">Completed</option>
+                  </select>
+                <br><br>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="closeAdd" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  
+  <!-- Modal for delete button-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete a Certification</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p>List of Certification</p>
+          <ul *ngFor="let student of students">
+            <div *ngIf="id===student._id">
+             <li *ngFor="let stud of student.cname" >
+                {{stud.certification}}
+                <button  (click)="getCid(stud._id)" (click)="getCname()"data-dismiss="modal" data-toggle="modal" data-target="#confirmModal"  class="btn btn-outline-danger btn-sm" >Delete</button> <br><br>
+
+              </li>
+              </div>
+          </ul>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="closeDelete" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  
+  <!-- Modal for edit button-->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Certification</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p>Edit Your Certification</p>
+          <ul *ngFor="let student of students">
+            <div *ngIf="id===student._id">
+             <li *ngFor="let stud of student.cname" >
+                {{stud.certification}}
+                <div class="dropdown">
+                  <button (click)="getCid(stud._id)" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     {{stud.status}}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="updateStatus('In progress')">In progress</a>
+                    <a class="dropdown-item" (click)="updateStatus('Completed')" >Completed</a>
+                  </div>
+                </div><br>
+              </li>
+              </div>
+          </ul>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Modal for add user -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form #addUser="ngForm" (ngSubmit)="addNewUser(addUser.value); addUser.resetForm();" ngNativeValidate>
+          <span>Name</span><br>
+          <input type="text" placeholder="Enter Name" name="name" ngModel required><br><br>
+          <span>Certification Name</span><br>
+          <input type="text" placeholder="Enter Name" name="certification" ngModel required><br><br>
+          <span>Status </span><br>
+          <select  name="status" ngModel required>
+            <option value="In progress">In progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <br><br>
+          <button  class="btn btn-primary ">Submit</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button id="closeAddUser" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- confirm delete modal-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        Are You Sure You Want to Delete {{cName}} ?
+      </div>
+      <div class="modal-footer">
+        <button (click)="deleteCertificate()" type="button"  class="btn btn-primary btn-sm" data-dismiss="modal">Confirm</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

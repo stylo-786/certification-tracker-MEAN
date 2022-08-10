@@ -1,0 +1,89 @@
+[
+    {
+        "id":1,
+        "name":"Sriya",
+        "cname":[
+            {
+                "id":1,
+                "certification":"L1 certification",
+                "status":"Completed"
+            },
+            {
+                "id":2,
+                "certification":"L2 certification",
+                "status":"In progress"
+            },
+            {
+                "id":3,
+                "certification":"L3 certification",
+                "status":"Completed"
+            }
+        ]
+        
+
+    },
+    {   "id":2,
+        "name":"Sudha",
+        "cname":[
+            {
+                "id":1,
+                "certification":"Python certification",
+                "status":"Completed"
+            },
+            {
+                "id":2,
+                "certification":"L1 certification",
+                "status":"In progress"
+            }
+            
+        ]
+    },
+    {   "id":3,
+        "name":"Mukesh",
+        "cname":[
+            {
+                "id":1,
+                "certification":"Angular Js",
+                "status":"In progress"
+            },
+            {
+                "id":2,
+                "certification":"Data Analyst",
+                "status":"In progress"
+            }
+            
+        ]
+    },
+    {
+        "id":4,
+        "name":"Shadab",
+        "cname":[
+            
+            {
+                "id":1,
+                "certification":"L2 certification",
+                "status":"In progress"
+            },
+            
+            {
+                "id":2,
+                "certification":"Ruby certification",
+                "status":"In progress"
+            },
+            {
+                "id":3,
+                "certification":"L3 certification",
+                "status":"Completed"
+            },
+            {
+                "id":4,
+                "certification":"Java certification",
+                "status":"In progress"
+            }
+
+        ]
+        
+
+    }
+   
+]
