@@ -33,11 +33,13 @@ export class DashboardComponent implements OnInit {
     console.log(this.cid);
   }
 
-  cName:any;
-  getCname(){
-    let filterData=this.students.filter(data=>data._id==this.id)
-    let filterData1=filterData[0].cname.filter(data=>data._id==this.cid)
-    this.cName= filterData1[0].certification;
+  cName: any;
+  getCname() {
+    let filterData = this.students.filter((data) => data._id == this.id);
+    let filterData1 = filterData[0].cname.filter(
+      (data) => data._id == this.cid
+    );
+    this.cName = filterData1[0].certification;
   }
 
   getStudent() {
@@ -58,20 +60,18 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteCertificate() {
-      this.appService.delCertificateApi(this.id, this.cid).subscribe((result) => {
-        result = this.getStudent();
-      });
+    this.appService.delCertificateApi(this.id, this.cid).subscribe((result) => {
+      result = this.getStudent();
+    });
 
-      setTimeout(() => {
-        let filterData = this.students.filter((data) => data._id === this.id);
-        if (filterData[0].cname.length == 0) {
-          this.appService.deleteUser(this.id).subscribe((result) => {
-            result = this.getStudent();
-          });
-        }
-      }, 100);
-      
-      
+    setTimeout(() => {
+      let filterData = this.students.filter((data) => data._id === this.id);
+      if (filterData[0].cname.length == 0) {
+        this.appService.deleteUser(this.id).subscribe((result) => {
+          result = this.getStudent();
+        });
+      }
+    }, 100);
   }
 
   addNewUser(value: any) {
