@@ -59,13 +59,13 @@ export class DashboardComponent implements OnInit {
     ref?.click();
   }
 
-  deleteCertificate() {
+   deleteCertificate() {
     this.appService.delCertificateApi(this.id, this.cid).subscribe((result) => {
       result = this.getStudent();
     });
 
     setTimeout(() => {
-      let filterData = this.students.filter((data) => data._id === this.id);
+      let filterData =  this.students.filter((data) => data._id === this.id);
       if (filterData[0].cname.length == 0) {
         this.appService.deleteUser(this.id).subscribe((result) => {
           result = this.getStudent();
