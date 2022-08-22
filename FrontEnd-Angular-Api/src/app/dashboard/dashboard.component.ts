@@ -74,6 +74,7 @@ export class DashboardComponent implements OnInit {
     }, 100);
   }
 
+
   addNewUser(value: any) {
     let data = {
       name: value.name,
